@@ -9,7 +9,7 @@
 
 }
 body {
-  background-image: url('../public/rikkaback.jpg');
+  background-image: url('/rikkaback.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
