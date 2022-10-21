@@ -9,6 +9,13 @@ import Button from '@mui/material/Button';
 function Home() {
 
   return ( <>
+
+<Head> 
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Rikka Website" />
+      <meta property="og:description" content="Website da discord bot Rikka"/>
+      <meta name="theme-color" content="#00d1ff" />
+</Head>
     <div className={styles.container}>   
       <h1 className={styles.titulo}>Ohayo user! Seja bem-vindo(a) ao meu website!</h1>
       <br /><br />
