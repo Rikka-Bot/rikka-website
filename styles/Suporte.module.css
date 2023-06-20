@@ -4,3 +4,6 @@
 .support h3 {
     color: #f8fbfc
 }
+.image {
+    border: 30px solid blue; 
+}
