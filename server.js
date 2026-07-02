@@ -256,7 +256,7 @@ app.prepare().then(() => {
   // Configurar sessão
   server.use(
     session({
-      secret: process.env.SESSION_SECRET || 'seu_secret_super_seguro_aqui',
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
       cookie: {
