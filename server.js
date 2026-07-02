@@ -16,7 +16,7 @@ const handle = app.getRequestHandler();
 const PORT = process.env.PORT || 3000;
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `http://localhost:${PORT}/auth/discord/callback`;
+const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `https://rikka-website.vercel.app/auth/discord/callback`;
 
 // Validar configuração Discord obrigatória
 if (!DISCORD_CLIENT_ID || !DISCORD_CLIENT_SECRET) {
