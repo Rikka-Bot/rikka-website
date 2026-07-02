@@ -1,0 +1,62 @@
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #5865f2;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #4752c4;
+}
+
+.loginButton {
+  background-color: #5865f2;
+}
+
+.loginButton:hover {
+  background-color: #4752c4;
+}
+
+.logoutButton {
+  padding: 8px 16px;
+  background-color: #ed4245;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.logoutButton:hover {
+  background-color: #da373c;
+}
+
+.userContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #5865f2;
+}

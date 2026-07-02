@@ -1,0 +1,117 @@
+const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+const DiscordStrategy = require('passport-discord').Strategy;
+const next = require('next');
+const bodyParser = require('body-parser');
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+const PORT = process.env.PORT || 3000;
+const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID || 'your_client_id_here';
+const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET || 'your_client_secret_here';
+const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `http://localhost:${PORT}/auth/discord/callback`;
+
+// Configurar Passport Discord Strategy
+passport.use(
+  new DiscordStrategy(
+    {
+      clientID: DISCORD_CLIENT_ID,
+      clientSecret: DISCORD_CLIENT_SECRET,
+      callbackURL: DISCORD_REDIRECT_URI,
+      scope: ['identify', 'email', 'guilds']
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // Aqui você pode salvar o usuário no banco de dados
+      const user = {
+        id: profile.id,
+        username: profile.username,
+        avatar: profile.avatar,
+        email: profile.email,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        guilds: profile.guilds
+      };
+      return done(null, user);
+    }
+  )
+);
+
+// Serializar e desserializar usuário
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
+// Iniciar a aplicação Next.js antes de configurar as rotas
+app.prepare().then(() => {
+  const server = express();
+
+  // Middlewares
+  server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({ extended: true }));
+
+  // Configurar sessão
+  server.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'seu_secret_super_seguro_aqui',
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 24 horas
+      }
+    })
+  );
+
+  // Inicializar Passport
+  server.use(passport.initialize());
+  server.use(passport.session());
+
+  // Rotas de autenticação Discord
+  server.get('/auth/discord', passport.authenticate('discord'));
+
+  server.get(
+    '/auth/discord/callback',
+    passport.authenticate('discord', { failureRedirect: '/' }),
+    (req, res) => {
+      // Redirecionado com sucesso
+      res.redirect('/dashboard');
+    }
+  );
+
+  // Rota de logout
+  server.get('/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Erro ao fazer logout' });
+      }
+      res.redirect('/');
+    });
+  });
+
+  // Rota para obter informações do usuário
+  server.get('/api/user', (req, res) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ authenticated: false });
+    }
+    res.json({ authenticated: true, user: req.user });
+  });
+
+  // Tratador padrão para Next.js
+  server.all('*', (req, res) => {
+    return handle(req, res);
+  });
+
+  server.listen(PORT, (err) => {
+    if (err) throw err;
+    console.log(`✅ Servidor rodando em http://localhost:${PORT}`);
+    console.log(`📝 Autenticação Discord configurada`);
+  });
+});
