@@ -11,9 +11,11 @@ export default function MainContainer({ children }) {
       <link rel="shortcut icon" href="/favicon.ico"/>
       <title>Rikka Website</title>
       </Head>
-    <Navbar />
-    <div className={styles.container}>{children}</div>
-    <Footer />
+    <div className={styles.wrapper}>
+      <Navbar />
+      <div className={styles.container}>{children}</div>
+      <Footer />
+    </div>
     </>
     )
 }

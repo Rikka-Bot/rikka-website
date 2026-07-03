@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rikka Website
 
 Projeto separado em dois serviços independentes:
@@ -24,3 +25,6 @@ npm run dev
 ```
 
 Configure as variáveis a partir dos arquivos .env.example de cada serviço.
+=======
+# Projeto de desenvolvimento da Rikka foi encerrado!
+>>>>>>> 19ed3627b1c9c09d74e34d41c4aa79d4dce1ecd6

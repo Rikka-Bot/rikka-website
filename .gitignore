@@ -30,6 +30,7 @@ yarn-error.log*
 
 # local env files
 .env
+.env*
 .env.*
 !.env.example
 !frontend/.env.example
