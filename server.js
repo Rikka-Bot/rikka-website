@@ -16,11 +16,11 @@ const handle = app.getRequestHandler();
 const PORT = process.env.PORT || 3000;
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `https://rikka-website.vercel.app/auth/discord/callback`;
+const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `https://rikka-website-production.up.railway.app/auth/discord/callback`;
 
 // Validar configuração Discord obrigatória
 if (!DISCORD_CLIENT_ID || !DISCORD_CLIENT_SECRET) {
-  console.error('❌ Erro: DISCORD_CLIENT_ID e DISCORD_CLIENT_SECRET são obrigatórios');
+  console.error('DISCORD_CLIENT_ID e DISCORD_CLIENT_SECRET são obrigatórios');
   console.error('   Configure essas variáveis no arquivo .env');
   process.exit(1);
 }
@@ -34,7 +34,7 @@ if (process.env.FIREBASE_SERVICE_ACCOUNT) {
   try {
     serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
   } catch (error) {
-    console.error('❌ Erro ao parsear FIREBASE_SERVICE_ACCOUNT:', error);
+    console.error(' Erro ao parsear FIREBASE_SERVICE_ACCOUNT:', error);
   }
 }
 
@@ -242,7 +242,7 @@ app.prepare().then(() => {
 
   // Configurar CORS para fetch com credentials
   server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', 'https://rikka-website-production.up.railway.app/');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
