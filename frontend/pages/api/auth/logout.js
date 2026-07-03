@@ -1,6 +1,6 @@
 // pages/api/auth/logout.js
-// Rota de logout que chama a rota Express
-export default async (req, res) => {
-  // Redirecionar para a rota Express de logout
-  res.redirect('/logout');
+
+export default async function handler(req, res) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+  res.redirect(`${apiUrl}/logout`);
 }

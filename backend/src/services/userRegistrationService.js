@@ -22,8 +22,15 @@ function getPreparedCollectionRefs(userRef) {
   };
 }
 
+async function ensureBlacklistField(userRef, userSnapshot) {
+  if (!Object.prototype.hasOwnProperty.call(userSnapshot.data() || {}, 'blacklisted')) {
+    await userRef.set({ blacklisted: false }, { merge: true });
+  }
+}
+
 async function registerUserProfile(profile, ipAddress) {
   const discordId = String(profile.id);
+  const normalizedIpAddress = ipAddress || 'unknown';
   const userRef = db.collection('users').doc(discordId);
   const existingUser = await userRef.get();
   const now = FieldValue.serverTimestamp();
@@ -32,8 +39,20 @@ async function registerUserProfile(profile, ipAddress) {
   getPreparedCollectionRefs(userRef);
 
   if (existingUser.exists) {
-    await userRef.set(verifiedUserData, { merge: true });
+    await ensureBlacklistField(userRef, existingUser);
     return { status: 'existing' };
+  }
+
+  if (normalizedIpAddress !== 'unknown') {
+    const existingIpSnapshot = await db
+      .collection('users')
+      .where('ipAddress', '==', normalizedIpAddress)
+      .limit(1)
+      .get();
+
+    if (!existingIpSnapshot.empty) {
+      return { status: 'ip_taken' };
+    }
   }
 
   const batch = db.batch();
@@ -42,6 +61,8 @@ async function registerUserProfile(profile, ipAddress) {
     userRef,
     {
       ...verifiedUserData,
+      ipAddress: normalizedIpAddress,
+      blacklisted: false,
       createdAt: now,
     },
     { merge: true }

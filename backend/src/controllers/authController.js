@@ -8,7 +8,15 @@ function getFrontendUrl() {
 async function handleDiscordCallback(req, res) {
   try {
     const ipAddress = getClientIp(req);
-    await registerUserProfile(req.user, ipAddress);
+    const result = await registerUserProfile(req.user, ipAddress);
+
+    if (result.status === 'existing') {
+      return res.redirect(getFrontendUrl() + '/verificado');
+    }
+
+    if (result.status === 'ip_taken') {
+      return res.redirect(getFrontendUrl() + '/bloqueado');
+    }
 
     return res.redirect(getFrontendUrl() + '/sucesso');
   } catch (error) {

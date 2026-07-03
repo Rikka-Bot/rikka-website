@@ -59,6 +59,12 @@ function getClientIp(req) {
   return req.ip || req.connection?.remoteAddress || 'unknown';
 }
 
+async function ensureBlacklistField(userRef, userSnapshot) {
+  if (!Object.prototype.hasOwnProperty.call(userSnapshot.data() || {}, 'blacklisted')) {
+    await userRef.set({ blacklisted: false }, { merge: true });
+  }
+}
+
 async function registerUserProfile(profile, ipAddress) {
   if (!firestore) {
     throw new Error('Firebase Admin não está inicializado.');
@@ -69,6 +75,7 @@ async function registerUserProfile(profile, ipAddress) {
   const existingUser = await userRef.get();
 
   if (existingUser.exists) {
+    await ensureBlacklistField(userRef, existingUser);
     return { status: 'existing' };
   }
 
@@ -89,6 +96,7 @@ async function registerUserProfile(profile, ipAddress) {
     username: profile.username || 'Unknown',
     avatar: profile.avatar || null,
     ipAddress,
+    blacklisted: false,
     createdAt,
   });
 
@@ -304,6 +312,10 @@ app.prepare().then(() => {
 
         const result = await registerUserProfile(req.user, ipAddress);
 
+        if (result.status === 'existing') {
+          return res.redirect('/verificado');
+        }
+
         if (result.status === 'ip_taken') {
           return res.redirect('/bloqueado');
         }
@@ -328,6 +340,10 @@ app.prepare().then(() => {
         console.log('🌐 IP do usuário:', ipAddress);
 
         const result = await registerUserProfile(req.user, ipAddress);
+
+        if (result.status === 'existing') {
+          return res.redirect('/verificado');
+        }
 
         if (result.status === 'ip_taken') {
           return res.redirect('/bloqueado');

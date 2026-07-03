@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 function obrigado() {

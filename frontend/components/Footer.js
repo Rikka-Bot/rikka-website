@@ -1,5 +1,4 @@
 import styles from '../styles/Footer.module.css'
-import { GitHubLogoIcon } from '@radix-ui/react-icons'
 
 export default function footer() {
     return(<>

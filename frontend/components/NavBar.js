@@ -1,4 +1,4 @@
-<<<<<<< HEAD:frontend/components/NavBar.js
+
 import Link from 'next/link'
 import styles from '../styles/NavBar.module.css'
 import { HomeIcon, DiscordLogoIcon, InfoCircledIcon } from '@radix-ui/react-icons'
@@ -11,18 +11,18 @@ export default function navbar() {
     return(<>
     <nav className={styles.navbar}>
     <div className={styles.logo}>
-      <Image src='/logo.png' width="40" height="40" alt="Rikka"/>
+      <Image src="/logo.png" width={40} height={40} alt="Rikka" />
       <h1>Rikka</h1>
     </div>
 <ul className={styles.link_items}>
  <li>
-    <Link href="/"><a><strong><HomeIcon />Home</strong></a></Link>
+    <Link href="/"><strong><HomeIcon />Home</strong></Link>
  </li>
  <li>
-   <Link href="/suporte"><a><strong><DiscordLogoIcon/>Suporte</strong></a></Link>
+   <Link href="/suporte"><strong><DiscordLogoIcon/>Suporte</strong></Link>
  </li>
  <li>
-  <Link href="/sobre"><a><strong><InfoCircledIcon/>Sobre</strong></a></Link>
+  <Link href="/sobre"><strong><InfoCircledIcon/>Sobre</strong></Link>
  </li>
  <li>
   <a href={apiUrl + '/auth/discord'}><Button variant='contained'><strong>Login</strong></Button></a>
@@ -32,37 +32,3 @@ export default function navbar() {
     </>)
 }
 
-=======
-import Link from 'next/link'
-import styles from '../styles/NavBar.module.css'
-import { HomeIcon, QuestionMarkCircledIcon, DiscordLogoIcon, InfoCircledIcon } from '@radix-ui/react-icons'
-import Image from 'next/image'
-import Button from '@mui/material/Button';
-import AuthButton from './AuthButton';
-
-export default function navbar() {
-    return(<>
-    <nav className={styles.navbar}>
-    <div className={styles.logo}>
-      <Image src='/logo.png' width="40" height="40" alt="Rikka"/>
-      <h1>Rikka</h1>
-    </div>
-<ul className={styles.link_items}>
- <li>
-    <Link href="/"><a><strong><HomeIcon />Home</strong></a></Link>
- </li>
- <li>
-   <Link href="/suporte"><a><strong><DiscordLogoIcon/>Suporte</strong></a></Link>
- </li>
- <li>
-  <Link href="/sobre"><a><strong><InfoCircledIcon/>Sobre</strong></a></Link>
- </li>
- <li>
-  <AuthButton />
- </li>
-</ul>
-    </nav>
-    </>)
-}
-
->>>>>>> 19ed3627b1c9c09d74e34d41c4aa79d4dce1ecd6:components/NavBar.js
