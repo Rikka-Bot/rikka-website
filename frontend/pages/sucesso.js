@@ -1,4 +1,4 @@
-<<<<<<< HEAD:frontend/pages/sucesso.js
+//HEAD:frontend/pages/sucesso.js
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
@@ -18,7 +18,7 @@ function sucesso() {
 }
 
 export default sucesso
-=======
+
 import Head from 'next/head';
 
 export default function Sucesso() {
@@ -42,4 +42,4 @@ export default function Sucesso() {
     </>
   );
 }
->>>>>>> 19ed3627b1c9c09d74e34d41c4aa79d4dce1ecd6:pages/sucesso.js
+// 19ed3627b1c9c09d74e34d41c4aa79d4dce1ecd6:pages/sucesso.js
