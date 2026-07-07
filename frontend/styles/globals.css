@@ -1,22 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
-html, body, #__next {
-  height: 100%;
+html,
+body,
+#__next {
+  min-height: 100%;
 }
 
 * {
-  padding: 0;
   margin: 0;
-  font-family: 'Varela Round', Helvetica;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Varela Round', Helvetica, sans-serif;
   list-style: none;
   text-decoration: none;
-
 }
+
 body {
-  background-image: url('/rikkaback.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background: url('/rikkaback.jpg') center center / cover no-repeat fixed;
   background-color: #00d1ff;
 }
-
