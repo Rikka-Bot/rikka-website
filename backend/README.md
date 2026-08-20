@@ -35,3 +35,14 @@ Copie .env.example para .env e configure:
 - GET /api/health
 
 O backend não renderiza HTML e expõe APIs/redirects de autenticação. O frontend fica separado na Vercel.
+
+## Contrato de usuário
+
+O OAuth é responsável somente por criar e sincronizar identidade/verificação em
+`users/{discordUserId}`. Defaults de gameplay e os documentos
+`profile/main` e `inventory/main` pertencem à Rikka e são completados de forma
+idempotente no primeiro comando do usuário.
+
+O `project_id` da service account deste backend deve ser o mesmo usado pela
+Rikka. `FIREBASE_PROJECT_ID` sozinho não corrige uma credencial pertencente a
+outro projeto.

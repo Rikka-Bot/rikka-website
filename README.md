@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 # Rikka Website
 
 Projeto separado em dois serviços independentes:
 
-- frontend: aplicação Next.js pronta para Vercel.
-- backend: API REST Express.js pronta para Railway.
+- `frontend`: aplicação Next.js pronta para Vercel.
+- `backend`: API REST Express.js pronta para Railway.
 
 ## Desenvolvimento local
 
@@ -24,7 +23,7 @@ npm install
 npm run dev
 ```
 
-Configure as variáveis a partir dos arquivos .env.example de cada serviço.
-=======
-# Projeto de desenvolvimento da Rikka foi encerrado!
->>>>>>> 19ed3627b1c9c09d74e34d41c4aa79d4dce1ecd6
+Configure as variáveis a partir dos arquivos `.env.example` de cada serviço.
+
+O `server.js` da raiz existe apenas como entrada de compatibilidade e encaminha
+para o backend mantido em `backend/server.js`.
