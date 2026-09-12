@@ -9,7 +9,8 @@ const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
   const router = useRouter();
-  const locale = router.pathname === '/en' || router.pathname.startsWith('/en/') ? 'en' : 'pt-BR';
+  const requestedPath = router.asPath.split(/[?#]/)[0];
+  const locale = requestedPath === '/en' || requestedPath.startsWith('/en/') ? 'en' : 'pt-BR';
   const page = pageFromPath(router.pathname);
   const t = (key) => dictionaries[locale][key] ?? pt[key] ?? key;
 
@@ -31,7 +32,11 @@ export function LanguageProvider({ children }) {
 
   const setLanguage = (next) => {
     localStorage.setItem('rikka-language', next);
-    router.push(localizedPath(page || 'home', next));
+    if (!page) {
+      router.push(next === 'en' ? '/en/404' : '/404');
+      return;
+    }
+    router.push(localizedPath(page, next));
   };
 
   return <LanguageContext.Provider value={{ locale, page, t, setLanguage }}>{children}</LanguageContext.Provider>;
