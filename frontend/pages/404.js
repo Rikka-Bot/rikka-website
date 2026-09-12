@@ -39,7 +39,7 @@ export default function NotFound() {
             <span className={styles.doodle}>···⌁</span>
           </div>
           <div className={styles.rikkaMessage}>
-            <Image src="/rikka.png" width={68} height={68} alt={t('common.avatar')} priority />
+            <Image src="/emojis/chorando.png" width={96} height={96} alt="" aria-hidden="true" className={styles.rikkaReaction} priority />
             <p>{t('notFound.rikka')}</p>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { localizedPath } from '../../i18n/routes';
@@ -22,7 +23,7 @@ export function DropGrabSections() {
 
 export function CollectionShowcase({ preview = false }) {
   const { t, locale } = useLanguage();
-  return <section className={`section ${styles.collectionSection}`}><div className={styles.collectionGrid}><Reveal className={styles.collectionCopy}><span className="sectionKicker">{t('collection.kicker')}</span><h2>{t('collection.title')}</h2><p>{t('collection.text')}</p><div className={styles.collectionStat}><b>{t('collection.deck')}</b><span>{t('collection.unique')}</span></div>{preview&&<Link className={styles.inlineLink} href={localizedPath('collection',locale)}>{t('collection.cta')} →</Link>}</Reveal><Reveal className={styles.collectionBoard}><span className={`${styles.sticker} ${styles.collectionSticker}`}>{t('sticker.plusOne')}</span>{[0,1,2,3,4,5].map(item=><CardPlaceholder key={item} index={item} compact />)}</Reveal></div></section>;
+  return <section className={`section ${styles.collectionSection}`}><div className={styles.collectionGrid}><Reveal className={styles.collectionCopy}><span className="sectionKicker">{t('collection.kicker')}</span><h2>{t('collection.title')}</h2><p>{t('collection.text')}</p><div className={styles.collectionStat}><b>{t('collection.deck')}</b><span>{t('collection.unique')}</span></div>{preview&&<Link className={styles.inlineLink} href={localizedPath('collection',locale)}>{t('collection.cta')} →</Link>}</Reveal><Reveal className={styles.collectionBoard}><div className={styles.collectionReaction} aria-hidden="true"><Image src="/emojis/happy.png" width={128} height={128} alt=""/><span className={`${styles.sticker} ${styles.collectionSticker}`}>{t('sticker.plusOne')}</span></div>{[0,1,2,3,4,5].map(item=><CardPlaceholder key={item} index={item} compact />)}</Reveal></div></section>;
 }
 
 export function EditionsSection() {

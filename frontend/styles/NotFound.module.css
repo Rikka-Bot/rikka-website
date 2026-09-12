@@ -4,3 +4,8 @@
 @media(max-width:760px){.page{min-height:0;padding:116px 16px 68px}.content{grid-template-columns:1fr;gap:56px;text-align:center}.copy>p{margin-inline:auto}.actions{justify-content:center}.scene{grid-row:1}.cardWrap{width:min(235px,70vw)}.rikkaMessage{margin-top:-12px;transform:none}.copy h1{margin-top:22px}.copy h2{margin-top:26px}.sparkleOne{top:10%;left:4%}.sparkleTwo{right:3%;bottom:8%}}
 @media(max-width:430px){.page{padding-top:108px}.content{gap:45px}.cardWrap{width:min(205px,64vw)}.missingCard{border-radius:22px;box-shadow:10px 12px 0 #ffddd9,0 22px 48px #17203324}.missingCard strong{font-size:5.2rem}.sticker{left:-18px;font-size:.58rem}.rikkaMessage{width:min(310px,100%);padding:9px 12px 9px 9px;text-align:left}.rikkaMessage img{width:56px;height:56px}.copy h1{font-size:clamp(4.7rem,25vw,6.2rem)}.copy h2{font-size:clamp(1.75rem,9vw,2.3rem)}.copy>p{font-size:.96rem}.actions{flex-direction:column}.actions :global(.button){width:100%}:global([data-theme="dark"]) .missingCard{box-shadow:10px 12px 0 #4b3037,0 22px 48px #0006}}
 @media(prefers-reduced-motion:reduce){.missingCard,.sticker{animation:none}}
+
+.rikkaReaction{width:76px;height:76px;object-fit:contain;border:0!important;border-radius:0!important;background:transparent!important;animation:reaction-sad-in .65s ease-out both}
+@keyframes reaction-sad-in{from{opacity:0;transform:translateY(-6px) rotate(3deg)}to{opacity:1;transform:translateY(0) rotate(0)}}
+@media(max-width:430px){.rikkaMessage .rikkaReaction{width:62px;height:62px}}
+@media(prefers-reduced-motion:reduce){.rikkaReaction{animation:none}}

@@ -37,3 +37,16 @@
 @media(max-width:780px){.pageHero:before,.pageHero:after{right:8%;transform:scale(.75) rotate(-10deg)}.sticker{font-size:.58rem}.rikkaNote{margin-bottom:58px}.wantedSticker{top:20px;left:20px}}
 @media(max-width:430px){.flowSection:before,.resourcesSection:before{width:90px;height:90px;opacity:.55}.collectionSticker{right:10px}.rikkaNote{align-items:flex-start;padding:14px}.noteAvatar{width:54px;height:54px}.rikkaNote p{font-size:.86rem}}
 @media(prefers-reduced-motion:reduce){.sticker{animation:none}.card:after,.card{transition:none}}
+
+/* Official Rikka reactions: small, contextual accents anchored to safe containers. */
+.collectionReaction{position:absolute;z-index:6;top:-63px;right:15px;display:flex;width:82px;height:82px;align-items:flex-end;justify-content:center;pointer-events:none;animation:reaction-pop .55s cubic-bezier(.2,.8,.2,1) both}
+.collectionReaction>img{display:block;width:72px;height:72px;object-fit:contain}
+.collectionReaction .collectionSticker{top:auto;right:50%;bottom:-5px;white-space:nowrap;transform:translateX(50%) rotate(3deg)}
+.noteReaction{padding:0;border-color:transparent;background:transparent}
+.noteReaction img{width:100%;height:100%;object-fit:contain;border-radius:0;animation:reaction-float-in .7s ease-out both}
+.ctaReaction{border:0;border-radius:0;object-fit:contain;transform:rotate(-3deg);animation:reaction-float-in .7s ease-out both}
+@keyframes reaction-pop{from{opacity:0;transform:translateY(9px) scale(.84)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes reaction-float-in{from{opacity:0;transform:translateY(8px) rotate(-5deg)}to{opacity:1;transform:translateY(0) rotate(-3deg)}}
+@media(max-width:780px){.collectionBoard{margin-top:26px}.collectionReaction{top:-53px;right:10px;width:70px;height:70px}.collectionReaction>img{width:62px;height:62px}}
+@media(max-width:430px){.collectionBoard{margin-top:22px}.collectionReaction{top:-47px;right:7px;width:62px;height:62px}.collectionReaction>img{width:56px;height:56px}.collectionReaction .collectionSticker{bottom:-3px;font-size:.52rem}.ctaReaction{width:92px;height:92px}}
+@media(prefers-reduced-motion:reduce){.collectionReaction,.noteReaction img,.ctaReaction{animation:none}}
