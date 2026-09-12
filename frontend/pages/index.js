@@ -1,50 +1,18 @@
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
+import PageSeo from '../components/PageSeo';
+import FinalCta from '../components/landing/FinalCta';
+import Reveal from '../components/landing/Reveal';
+import { CollectionShowcase, FlowSteps, ResourceCards } from '../components/landing/SharedSections';
+import { useLanguage } from '../contexts/LanguageContext';
+import { localizedPath } from '../i18n/routes';
+import { DISCORD_INVITE_URL, DREAMS_URL, SITE_URL } from '../lib/siteConfig';
+import styles from '../styles/Home.module.css';
 
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
-import Button from '@mui/material/Button';
-
-
-//Tenho que colocar um scrollbar aqui, se quiser fazer por mim agradeço rsrsrs
-function Home() {
-
-  return ( <>
-
-<Head> 
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="Rikka Website" />
-      <meta property="og:description" content="Website da discord bot Rikka"/>
-      <meta name="theme-color" content="#00d1ff" />
-</Head>
-    <div className={styles.container}>   
-      <h1 className={styles.titulo}><strong>Rikka discord bot</strong></h1>
-      <br /><br />
-      <Image className={styles.imagem} src="/Rikka-no-back.png" width={300} height={250} alt="Rikka" />
-     <h3 className={styles.meio}>Me convide para seu servidor:<br /><a href='https://discord.com/api/oauth2/authorize?client_id=770762400034848808&permissions=8&scope=bot%20applications.commands'><Button variant='contained'><strong>Convite</strong></Button></a></h3>
-      <br/>
-      <h3 className={styles.meio2}>
-  ⭐ Enjoying Rikka?
-  <br />
-  Leave a vote on top.gg!
-  <br /><br />
-
-  <div className={styles.topgg}>
-  <a
-    href="https://top.gg/bot/770762400034848808"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img
-      src="https://top.gg/api/widget/770762400034848808.svg"
-      alt="Vote for Rikka"
-    />
-  </a>
-</div>
-</h3>
-    </div>
-    </>)
-}
-
-export default Home
+export default function Home(){const {t,locale}=useLanguage();const data={'@context':'https://schema.org','@type':'SoftwareApplication',name:'Rikka',description:t('home.seo.description'),url:SITE_URL,applicationCategory:'EntertainmentApplication',operatingSystem:'Discord',creator:{'@type':'Organization',name:'Dreams Experience',url:DREAMS_URL}};return <><PageSeo titleKey="home.seo.title" descriptionKey="home.seo.description" pageKey="home"/><Head><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(data)}}/></Head><main className={styles.page}>
+  <section className={styles.hero}><div className={styles.heroGlow}/><div className={styles.heroContent}><div className={styles.heroCopy}><div className={styles.eyebrow}><span>✦</span>{t('home.kicker')}</div><h1>{t('home.title')}<br/><em>{t('home.accent')}</em></h1><p>{t('home.text')}</p><div className={styles.heroActions}><a className="button buttonPrimary" href={DISCORD_INVITE_URL} target="_blank" rel="noreferrer">{t('common.add')} ↗</a><Link className="button buttonGhost" href={localizedPath('how',locale)}>{t('home.howCta')} →</Link></div><div className={styles.heroTags}><span>ANIME</span><span>GAMES</span><span>CARDS</span><span>DISCORD</span></div></div><div className={styles.heroArt}><div className={styles.heroImageFrame}><Image src="/selfinha.jpg" alt="Rikka" fill priority sizes="(max-width: 768px) 94vw, 52vw" className={styles.heroImage}/></div><div className={`${styles.floatingCard} ${styles.floatingCardTop}`}><span>DROP!</span><b>03 CARDS</b></div><div className={`${styles.floatingCard} ${styles.floatingCardBottom}`}><span>{t('flow.collection').toUpperCase()}</span><b>{t('collection.unique')} ♡</b></div><span className={styles.sparkleOne}>✦</span><span className={styles.sparkleTwo}>✦</span></div></div></section>
+  <section className={styles.intro}><Reveal className={styles.introInner}><div className={styles.avatarSeal}><Image src="/rikka.png" alt={t('common.avatar')} width={88} height={88}/></div><div><span className="sectionKicker">{t('home.hello')}</span><h2>{t('home.intro')}</h2><p>{t('home.introText')}</p></div></Reveal></section>
+  <FlowSteps preview/><CollectionShowcase preview/><div className={styles.previewResources}><ResourceCards preview/></div><FinalCta/>
+  <section className={styles.homeDreams}><Reveal><span>{t('home.dreams')}</span><p>{t('home.dreamsText')}</p><Link href={localizedPath('about',locale)}>{t('home.aboutCta')} →</Link></Reveal></section>
+  </main></>;}

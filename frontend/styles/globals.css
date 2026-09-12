@@ -1,21 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
-html,
-body,
-#__next {
-  min-height: 100%;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Varela Round', Helvetica, sans-serif;
-  list-style: none;
-  text-decoration: none;
-}
-
-body {
-  background: url('/rikkaback.jpg') center center / cover no-repeat fixed;
-  background-color: #00d1ff;
-}
+:root{--cyan:#19bfd1;--aqua:#74e3ea;--navy:#1f2940;--navy-dark:#151c2c;--coral:#ff7466;--soft-coral:#ff9a8f;--white:#f9fbff;--bg:#fff;--surface:#fff;--surface-soft:#f4fbfc;--text:#1f2940;--muted:#68738d;--line:#dce8ec;--nav-bg:rgba(249,251,255,.9);--shadow:0 22px 60px rgba(23,51,67,.12)}
+[data-theme="dark"]{--bg:#101827;--surface:#192235;--surface-soft:#202a3f;--text:#f7f9ff;--muted:#aeb8cc;--line:rgba(255,255,255,.09);--nav-bg:rgba(16,24,39,.9);--shadow:0 22px 60px rgba(0,0,0,.28)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:88px}body{color:var(--text);background:var(--bg);font-family:"Nunito Sans","Avenir Next",Inter,system-ui,-apple-system,sans-serif;line-height:1.6;overflow-x:hidden;transition:color .2s ease,background-color .2s ease}body,button,a{font:inherit}a{color:inherit;text-decoration:none}button{color:inherit}img{max-width:100%}::selection{background:var(--aqua);color:var(--navy-dark)}
+.section{width:min(1180px,calc(100% - 48px));margin:0 auto;padding:112px 0}.sectionHeading{max-width:680px;margin:0 auto 64px;text-align:center}.sectionHeading h2{font-size:clamp(2.25rem,5vw,4.25rem);line-height:1.04;letter-spacing:-.055em}.sectionHeading p{margin-top:18px;color:var(--muted);font-size:1.08rem}.sectionKicker{display:block;margin-bottom:12px;color:#0d8f9e;font-size:.77rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:0 24px;border:1px solid transparent;border-radius:15px;font-weight:900;transition:transform .2s,box-shadow .2s,background-color .2s,border-color .2s}.button:hover{transform:translateY(-2px)}.button:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:4px}.buttonPrimary{color:#fff;background:var(--navy);box-shadow:0 12px 28px rgba(31,41,64,.2)}.buttonGhost{border-color:var(--line);background:var(--surface)}.buttonLight{color:var(--navy-dark);background:#fff;box-shadow:0 14px 32px rgba(18,60,72,.18)}.buttonOutline{color:#fff;border-color:rgba(255,255,255,.48);background:rgba(255,255,255,.08)}
+[data-theme="dark"] .buttonPrimary{color:#101827;background:var(--aqua)}[data-theme="dark"] .sectionKicker{color:var(--aqua)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease var(--reveal-delay),transform .65s cubic-bezier(.2,.7,.2,1) var(--reveal-delay)}.reveal[data-visible=true]{opacity:1;transform:none}
+@media(max-width:640px){.section{width:min(100% - 32px,1180px);padding:80px 0}.sectionHeading{margin-bottom:42px}.button{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.button,body{transition:none}}

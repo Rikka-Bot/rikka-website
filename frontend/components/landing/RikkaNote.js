@@ -1,0 +1,2 @@
+import Image from 'next/image';import {useLanguage} from '../../contexts/LanguageContext';import Reveal from './Reveal';import styles from '../../styles/Home.module.css';
+export default function RikkaNote({messageKey,tone='cyan'}){const {t}=useLanguage();return <Reveal className={`${styles.rikkaNote} ${tone==='coral'?styles.rikkaNoteCoral:''}`}><div className={styles.noteAvatar}><Image src="/rikka.png" width={62} height={62} alt=""/></div><div><span>{t('rikkaNote.label')}</span><p>{t(messageKey)}</p></div><i aria-hidden="true"/></Reveal>;}

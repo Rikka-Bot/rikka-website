@@ -1,27 +1,2 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Suporte.module.css'
-import Button from '@mui/material/Button';
-
-
-function suporte() {
-    return (
-    <>
-    <Head>
-        <title>Suporte</title>
-    </Head>
-    <div>
-    <h1 className={styles.support}>Precisando de ajuda?</h1>
-    <h3 className={styles.support}>Entre no servidor Rikka Land e fale diretamente com os desenvolvedores:</h3>
-    <br /><br />
-    <Image className={styles.image} src="/rikkaland.png" width={300} height={250} alt="Rikka Land" />
-    <br />
-    <a href='https://discord.gg/eMzpeyxtHf'><Button variant='contained'><strong>Servidor</strong></Button></a>
-    </div>
-
-
-    </>
-    )
-}
-
-export default suporte
+import Image from 'next/image';import PageSeo from '../components/PageSeo';import {useLanguage} from '../contexts/LanguageContext';import {SUPPORT_URL} from '../lib/siteConfig';import styles from '../styles/Suporte.module.css';
+export default function Suporte(){const {t}=useLanguage();return <><PageSeo titleKey="support.seo" descriptionKey="support.text" pageKey="support" robots="noindex, follow"/><main className={styles.page}><div className={styles.content}><Image src="/rikka.png" width={112} height={112} alt={t('common.avatar')} priority/><span>{t('support.kicker')}</span><h1>{t('support.title')}</h1><p>{t('support.text')}</p><a href={SUPPORT_URL} target="_blank" rel="noreferrer">{t('support.cta')} ↗</a></div></main></>;}

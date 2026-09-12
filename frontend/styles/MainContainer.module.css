@@ -1,11 +1,3 @@
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-.container {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-  }
+.wrapper{display:flex;min-height:100vh;flex-direction:column}.container{flex:1}.skipLink{position:fixed;z-index:200;top:8px;left:8px;transform:translateY(-150%);padding:10px 16px;border-radius:10px;background:#fff;font-weight:800;box-shadow:0 5px 20px #0002}.skipLink:focus{transform:none}
+.pageTransition{animation:route-in .36s ease both}@keyframes route-in{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.pageTransition{animation:none}}
+:global([data-theme="dark"]) .skipLink{color:var(--text);background:var(--surface)}

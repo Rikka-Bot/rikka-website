@@ -1,0 +1,36 @@
+# Rikka
+
+> Rikka is a Discord card collection bot focused on collecting characters from anime and games.
+
+## Languages
+
+The Rikka website is available in:
+
+- Portuguese (Brazil): https://rikka-website.vercel.app/
+- English: https://rikka-website.vercel.app/en
+
+## Portuguese Pages
+
+- Home: https://rikka-website.vercel.app/
+- How it works: https://rikka-website.vercel.app/como-funciona
+- Collection: https://rikka-website.vercel.app/colecao
+- Features: https://rikka-website.vercel.app/recursos
+- About: https://rikka-website.vercel.app/sobre
+
+## English Pages
+
+- Home: https://rikka-website.vercel.app/en
+- How it works: https://rikka-website.vercel.app/en/how-it-works
+- Collection: https://rikka-website.vercel.app/en/collection
+- Features: https://rikka-website.vercel.app/en/features
+- About: https://rikka-website.vercel.app/en/about
+
+## Core Experience
+
+Cards appear through drops, users claim one through a grab, and claimed cards become part of their collection. Wishlists, trades, items, and currency support that collection experience.
+
+## Creator
+
+Dreams Experience
+
+https://dreamsexperience.xyz/

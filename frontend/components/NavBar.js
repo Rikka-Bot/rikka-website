@@ -1,133 +1,54 @@
-"use client";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useLanguage } from '../contexts/LanguageContext';
+import { localizedPath } from '../i18n/routes';
+import { DISCORD_INVITE_URL } from '../lib/siteConfig';
+import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
+import styles from '../styles/NavBar.module.css';
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-
-import styles from "../styles/NavBar.module.css";
-
-import {
-  HomeIcon,
-  DiscordLogoIcon,
-  InfoCircledIcon,
-  HamburgerMenuIcon,
-} from "@radix-ui/react-icons";
-
-import {
-  Button,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  IconButton,
-  Box,
-} from "@mui/material";
-
-export default function Navbar() {
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-
+export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const { locale, t } = useLanguage();
+  const links = [['how', 'nav.how'], ['collection', 'nav.collection'], ['features', 'nav.features'], ['about', 'nav.about']];
 
-  return (
-    <>
-      <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <Image
-            src="/logo.png"
-            width={40}
-            height={40}
-            alt="Rikka"
-          />
-          <h1>Rikka</h1>
-        </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-        {/* Desktop */}
-        <div className={styles.desktop}>
-          <ul className={styles.link_items}>
-            <li>
-              <Link href="/">
-                <HomeIcon /> Home
-              </Link>
-            </li>
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
-            <li>
-              <Link href="/suporte">
-                <DiscordLogoIcon /> Suporte
-              </Link>
-            </li>
+  const active = (href) => router.pathname === href;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
-            <li>
-              <Link href="/sobre">
-                <InfoCircledIcon /> Sobre
-              </Link>
-            </li>
-          </ul>
-
-          <a href={`${apiUrl}/auth/discord`}>
-            <Button variant="contained">LOGIN</Button>
-          </a>
-        </div>
-
-        {/* Mobile */}
-        <IconButton
-          className={styles.mobileButton}
-          onClick={() => setOpen(true)}
-        >
-          <HamburgerMenuIcon width={24} height={24} />
-        </IconButton>
-      </nav>
-
-      <Drawer
-        anchor="right"
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <Box sx={{ width: 260 }}>
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                component={Link}
-                href="/"
-                onClick={() => setOpen(false)}
-              >
-                <ListItemText primary="🏠 Home" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem disablePadding>
-              <ListItemButton
-                component={Link}
-                href="/suporte"
-                onClick={() => setOpen(false)}
-              >
-                <ListItemText primary="🎮 Suporte" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem disablePadding>
-              <ListItemButton
-                component={Link}
-                href="/sobre"
-                onClick={() => setOpen(false)}
-              >
-                <ListItemText primary="ℹ️ Sobre" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem sx={{ mt: 2 }}>
-              <Button
-                variant="contained"
-                fullWidth
-                href={`${apiUrl}/auth/discord`}
-              >
-                LOGIN
-              </Button>
-            </ListItem>
-          </List>
-        </Box>
-      </Drawer>
-    </>
-  );
+  return <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={styles.nav} aria-label={t('nav.label')}>
+      <Link className={styles.brand} href={localizedPath('home', locale)} aria-label={t('nav.logoLabel')}>
+        <Image className={styles.brandLogo} src="/logo.png" width={44} height={44} alt="" priority />
+        <span>Rikka<b>.</b></span>
+      </Link>
+      <div className={styles.desktopNav}>
+        <ul>{links.map(([page, key]) => { const href = localizedPath(page, locale); return <li key={page}><Link href={href} className={active(href) ? styles.active : ''} aria-current={active(href) ? 'page' : undefined}>{t(key)}</Link></li>; })}</ul>
+        <div className={styles.globalControls}><LanguageSwitcher /><ThemeToggle /></div>
+        <a className={styles.loginLink} href={`${apiUrl}/auth/discord`}>{t('nav.login')}</a>
+        <a className={styles.navCta} href={DISCORD_INVITE_URL} target="_blank" rel="noreferrer">{t('nav.add')} <span>↗</span></a>
+      </div>
+      <button className={styles.menuButton} type="button" aria-label={open ? t('nav.close') : t('nav.open')} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(value => !value)}><span /><span /><span /></button>
+    </nav>
+    <div id="mobile-menu" className={`${styles.mobileMenu} ${open ? styles.mobileOpen : ''}`} aria-hidden={!open}>
+      <ul>{links.map(([page, key]) => { const href = localizedPath(page, locale); return <li key={page}><Link href={href} className={active(href) ? styles.active : ''} aria-current={active(href) ? 'page' : undefined} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)}>{t(key)}<span>↗</span></Link></li>; })}</ul>
+      <div className={styles.mobilePreferences}><div><small>{t('lang.label')}</small><LanguageSwitcher mobile onSelect={() => setOpen(false)} /></div><div><small>{t('theme.label')}</small><ThemeToggle mobile /></div></div>
+      <div className={styles.mobileActions}><a href={`${apiUrl}/auth/discord`} tabIndex={open ? 0 : -1}>{t('nav.login')}</a><a href={DISCORD_INVITE_URL} target="_blank" rel="noreferrer" tabIndex={open ? 0 : -1}>{t('nav.add')}</a></div>
+    </div>
+  </header>;
 }
