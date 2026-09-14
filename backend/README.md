@@ -69,6 +69,4 @@ sessão: 120/minuto; logout: 30/minuto, por IP e por processo. Reinícios e rép
 não compartilham contadores. Health/hello não carregam sessão. Mantenha
 `trust proxy=1` até validar a cadeia real de proxies; não use IP como autorização.
 
-Consulte [a auditoria de segurança](../SECURITY_AUDIT.md), especialmente a
-revogação da chave Firebase Admin encontrada no histórico e as verificações
-de IAM, Rules, TTL e infraestrutura antes da loja.
+
