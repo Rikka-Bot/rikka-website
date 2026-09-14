@@ -14,6 +14,7 @@ export default function PageSeo({ title, description, titleKey, descriptionKey, 
   const enUrl = `${SITE_URL}${localizedPath(pageKey, 'en')}`;
   return <Head>
     <title>{resolvedTitle}</title><meta name="description" content={resolvedDescription} /><meta name="robots" content={robots} />
+    <meta name="keywords" content="Rikka, Discord bot, Discord card collection bot, card collection, Dreams Experience" />
     <link rel="canonical" href={canonical} /><link rel="alternate" hrefLang="pt-BR" href={ptUrl} /><link rel="alternate" hrefLang="en" href={enUrl} /><link rel="alternate" hrefLang="x-default" href={ptUrl} />
     <meta property="og:type" content="website" /><meta property="og:title" content={resolvedTitle} /><meta property="og:description" content={resolvedDescription} /><meta property="og:url" content={canonical} /><meta property="og:site_name" content="Rikka" />
     <meta property="og:locale" content={locale === 'en' ? 'en_US' : 'pt_BR'} /><meta property="og:locale:alternate" content={locale === 'en' ? 'pt_BR' : 'en_US'} />

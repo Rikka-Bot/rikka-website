@@ -1,7 +1,7 @@
 {
   "name": "Rikka",
   "short_name": "Rikka",
-  "description": "Bot de coleção de cartas para Discord.",
+  "description": "Rikka — Discord card collection bot.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f9fbff",
