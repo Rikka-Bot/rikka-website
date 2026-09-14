@@ -12,12 +12,17 @@ Backend Express.js separado do frontend Next.js.
 Copie .env.example para .env e configure:
 
 - PORT: porta local ou fornecida pela Railway.
-- SESSION_SECRET: segredo usado pelos cookies de sessão.
+- SESSION_SECRET: segredo aleatório com pelo menos 32 caracteres (obrigatório em produção).
+- SESSION_COLLECTION: coleção Firestore das sessões (padrão: sessions).
+- SESSION_COOKIE_NAME: nome do cookie (padrão: rikka.sid).
+- SESSION_COOKIE_SAME_SITE: lax no fluxo same-origin recomendado; none apenas para acesso direto cross-site.
+- SESSION_MAX_AGE_MS: duração renovável da sessão (padrão: 7 dias).
 - DATABASE_URL: reservado para banco de dados futuro.
-- CORS_ORIGIN: URL do frontend, por exemplo https://seu-projeto.vercel.app.
+- FRONTEND_URL: URL canônica do frontend, usada nos redirects.
+- CORS_ORIGINS: lista separada por vírgulas de origens explicitamente permitidas.
 - DISCORD_CLIENT_ID: client id do app Discord.
 - DISCORD_CLIENT_SECRET: client secret do app Discord.
-- DISCORD_REDIRECT_URI: callback cadastrado no Discord, por exemplo https://seu-backend.up.railway.app/auth/discord/callback.
+- DISCORD_REDIRECT_URI: callback same-origin cadastrado no Discord, por exemplo https://seu-projeto.vercel.app/auth/discord/callback.
 - DISCORD_WEBHOOK_URL: webhook opcional para avisar novo cadastro.
 - FIREBASE_PROJECT_ID: id do projeto Firebase.
 - FIREBASE_SERVICE_ACCOUNT: JSON da service account do Firebase em uma unica linha.
@@ -35,6 +40,11 @@ Copie .env.example para .env e configure:
 - GET /api/health
 
 O backend não renderiza HTML e expõe APIs/redirects de autenticação. O frontend fica separado na Vercel.
+
+As rotas de autenticação devem ser acessadas pelo domínio do frontend. O Next.js
+as encaminha para o backend, mantendo o cookie como first-party. O Railway usa
+Firestore como store persistente; configure uma política TTL para o campo
+`expiresAt` da coleção escolhida para remover documentos expirados.
 
 ## Contrato de usuário
 

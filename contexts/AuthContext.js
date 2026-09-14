@@ -18,6 +18,11 @@ export const AuthProvider = ({ children }) => {
           'Content-Type': 'application/json'
         }
       });
+      if (res.status === 401) {
+        setUser(null);
+        return;
+      }
+      if (!res.ok) throw new Error(`Auth request failed with status ${res.status}`);
       const data = await res.json();
       setUser(data.authenticated ? data.user : null);
     } catch (error) {

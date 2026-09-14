@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-
 export default function Debug() {
   const [authStatus, setAuthStatus] = useState('Carregando...');
   const [authData, setAuthData] = useState(null);
@@ -10,8 +8,8 @@ export default function Debug() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        console.log(`🔍 Debug: Fazendo fetch para ${API_URL}/api/auth/user`);
-        const response = await fetch(`${API_URL}/api/auth/user`, {
+        console.log('Debug: Fazendo fetch para /api/auth/user');
+        const response = await fetch('/api/auth/user', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -56,8 +54,8 @@ export default function Debug() {
       <div style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#2d2d2d', borderRadius: '5px' }}>
         <h2>Links de Teste:</h2>
         <ul>
-          <li><a href={`${API_URL}/auth/discord`} style={{ color: '#0099ff' }}>Login com Discord</a></li>
-          <li><a href={`${API_URL}/logout`} style={{ color: '#0099ff' }}>Logout</a></li>
+          <li><a href="/auth/discord" style={{ color: '#0099ff' }}>Login com Discord</a></li>
+          <li><a href="/logout" style={{ color: '#0099ff' }}>Logout</a></li>
           <li><Link href="/sucesso" style={{ color: '#0099ff' }}>Sucesso</Link></li>
           <li><Link href="/bloqueado" style={{ color: '#0099ff' }}>Bloqueado</Link></li>
           <li><Link href="/" style={{ color: '#0099ff' }}>Home</Link></li>

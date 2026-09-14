@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const { passport } = require('../config/passport');
 const {
   handleDiscordCallback,
@@ -6,9 +6,10 @@ const {
   logout,
   logoutAndRedirect,
 } = require('../controllers/authController');
+const { getFrontendUrl } = require('../config/runtime');
 
 const router = express.Router();
-const failureRedirect = process.env.CORS_ORIGIN || 'http://localhost:3000';
+const failureRedirect = getFrontendUrl();
 
 router.get('/auth/discord', passport.authenticate('discord'));
 router.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect }), handleDiscordCallback);

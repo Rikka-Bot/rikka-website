@@ -13,6 +13,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    const apiUrl = (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000').replace(/\/$/, '');
+    return [
+      { source: '/auth/:path*', destination: `${apiUrl}/auth/:path*` },
+      { source: '/api/auth/:path*', destination: `${apiUrl}/api/auth/:path*` },
+      { source: '/logout', destination: `${apiUrl}/logout` },
+    ];
+  },
 };
 
 module.exports = nextConfig;

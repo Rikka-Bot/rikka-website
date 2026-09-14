@@ -1,15 +1,15 @@
 import { useState, createContext, useContext, useEffect, useCallback } from 'react';
 
 const AuthContext = createContext();
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-
 const fetchAuthUser = async () => {
-  const res = await fetch(`${API_URL}/api/auth/user`, {
+  const res = await fetch('/api/auth/user', {
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
   });
+  if (res.status === 401) return null;
+  if (!res.ok) throw new Error(`Auth request failed with status ${res.status}`);
   const data = await res.json();
   return data.authenticated ? data.user : null;
 };
