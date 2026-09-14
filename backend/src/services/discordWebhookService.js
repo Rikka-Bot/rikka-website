@@ -38,23 +38,20 @@ async function sendNewUserWebhook({ username, discordId, ipAddress }) {
     };
 
     const request = https.request(url, options, (response) => {
-      let responseBody = '';
-
-      response.on('data', (chunk) => {
-        responseBody += chunk;
-      });
+      response.resume();
 
       response.on('end', () => {
         if (response.statusCode && response.statusCode >= 200 && response.statusCode < 300) {
-          resolve(responseBody);
+          resolve();
           return;
         }
 
-        reject(new Error('Webhook falhou com status ' + response.statusCode + ': ' + responseBody));
+        reject(new Error('Webhook failed'));
       });
     });
 
     request.on('error', reject);
+    request.setTimeout(5000, () => request.destroy(new Error('Webhook timeout')));
     request.write(body);
     request.end();
   });

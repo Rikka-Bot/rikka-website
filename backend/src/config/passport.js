@@ -15,10 +15,9 @@ function sessionIdentity(user) {
   };
 }
 
-async function loadCurrentIdentity(identity) {
-  const { db } = require('./firebase');
+async function loadCurrentIdentity(identity, db = require('./firebase').db) {
   const snapshot = await db.collection('users').doc(String(identity.id)).get();
-  if (!snapshot.exists) return identity;
+  if (!snapshot.exists) return { ...identity, verificationStatus: identity.verificationStatus === 'blocked' ? 'blocked' : 'unverified' };
   const user = snapshot.data() || {};
   return {
     ...identity,
@@ -52,4 +51,4 @@ function configurePassport({ loadIdentity = loadCurrentIdentity } = {}) {
   });
 }
 
-module.exports = { configurePassport, passport, sessionIdentity };
+module.exports = { configurePassport, passport, sessionIdentity, loadCurrentIdentity };

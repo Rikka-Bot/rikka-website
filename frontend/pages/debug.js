@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { logout } from '../lib/logout';
+
+export function getServerSideProps() {
+  return process.env.NODE_ENV === 'production' ? { notFound: true } : { props: {} };
+}
 
 export default function Debug() {
   const [authStatus, setAuthStatus] = useState('Carregando...');
@@ -55,7 +60,7 @@ export default function Debug() {
         <h2>Links de Teste:</h2>
         <ul>
           <li><a href="/auth/discord" style={{ color: '#0099ff' }}>Login com Discord</a></li>
-          <li><a href="/logout" style={{ color: '#0099ff' }}>Logout</a></li>
+          <li><a href="/logout" onClick={logout} style={{ color: '#0099ff' }}>Logout</a></li>
           <li><Link href="/sucesso" style={{ color: '#0099ff' }}>Sucesso</Link></li>
           <li><Link href="/bloqueado" style={{ color: '#0099ff' }}>Bloqueado</Link></li>
           <li><Link href="/" style={{ color: '#0099ff' }}>Home</Link></li>

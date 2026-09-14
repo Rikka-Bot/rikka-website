@@ -4,10 +4,12 @@ const allowedOrigins = getAllowedOrigins();
 function createCorsOptions(origins = allowedOrigins) {
   return {
     origin(origin, callback) {
-      if (!origin || origins.includes(origin.replace(/\/$/, ''))) return callback(null, true);
-      return callback(new Error('Origin not allowed by CORS'));
+      if (!origin || origins.includes(origin)) return callback(null, true);
+      return callback(Object.assign(new Error('Origin not allowed by CORS'), { status: 403 }));
     },
     credentials: true,
+    methods: ['GET', 'HEAD', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
   };
 }
 

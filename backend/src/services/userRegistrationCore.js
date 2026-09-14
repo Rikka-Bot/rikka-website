@@ -60,7 +60,7 @@ function createUserRegistrationService({ db, FieldValue, sendNewUserWebhook }) {
         if (Object.keys(patch).length > 0) {
           transaction.set(userRef, patch, { merge: true });
         }
-        return { status: 'existing', wrote: Object.keys(patch).length > 0 };
+        return { status: 'existing', verificationStatus: existingUser.data().blacklisted ? 'blocked' : 'verified', wrote: Object.keys(patch).length > 0 };
       }
 
       if (normalizedIpAddress !== 'unknown') {
@@ -84,7 +84,7 @@ function createUserRegistrationService({ db, FieldValue, sendNewUserWebhook }) {
           ipAddress: normalizedIpAddress,
         });
       } catch (webhookError) {
-        console.error('Erro ao enviar webhook do Discord:', webhookError.message);
+        console.error('Discord registration webhook failed');
       }
     }
 

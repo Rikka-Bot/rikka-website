@@ -21,18 +21,18 @@ function createDiscordCallbackHandler(registerUser = (...args) => {
   return async function handleDiscordCallback(req, res) {
   try {
     const result = await registerUser(req.user, getClientIp(req));
-    const verificationStatus = result.status === 'ip_taken' ? 'blocked' : 'verified';
+    const verificationStatus = result.verificationStatus || (result.status === 'ip_taken' ? 'blocked' : 'verified');
 
     // Passport regenerates the session during logIn, protecting against fixation.
     await refreshLogin(req, { ...req.user, verificationStatus });
     // Persist the regenerated session before the browser follows the redirect.
     await saveSession(req);
 
+    if (verificationStatus === 'blocked') return res.redirect(getFrontendUrl() + '/bloqueado');
     if (result.status === 'existing') return res.redirect(getFrontendUrl() + '/verificado');
-    if (result.status === 'ip_taken') return res.redirect(getFrontendUrl() + '/bloqueado');
     return res.redirect(getFrontendUrl() + '/sucesso');
   } catch (error) {
-    console.error('Erro ao processar cadastro do Discord:', error);
+    console.error('Discord registration failed');
     return res.redirect(getFrontendUrl());
   }
   };
@@ -75,7 +75,7 @@ function logout(req, res) {
 function logoutAndRedirect(req, res) {
   clearSession(req, res, (error) => {
     if (error) return res.status(500).json({ error: 'Erro ao fazer logout' });
-    return res.redirect(getFrontendUrl() + '/?logged_out=true');
+    return res.redirect(303, getFrontendUrl() + '/?logged_out=true');
   });
 }
 

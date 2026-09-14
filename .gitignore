@@ -46,3 +46,19 @@ backend/.railway
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local credentials and diagnostic artifacts (tracked files require manual review)
+*service-account*.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*credentials*.json
+*.key
+*.p12
+*.pfx
+*.log
+*.bak
+*.old
+*.tmp
+*.dump
+*.sql
+.audit-tmp/

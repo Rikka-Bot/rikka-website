@@ -16,7 +16,7 @@ router.get('/auth/discord/callback', passport.authenticate('discord', { failureR
 router.get('/api/auth/callback', passport.authenticate('discord', { failureRedirect }), handleDiscordCallback);
 router.get('/api/auth/user', getAuthenticatedUser);
 router.post('/api/auth/logout', logout);
-router.get('/logout', logoutAndRedirect);
+router.get('/logout', (req, res) => res.set('Allow', 'POST').status(405).json({ message: 'Use POST to log out' }));
 router.post('/logout', logoutAndRedirect);
 
 module.exports = router;

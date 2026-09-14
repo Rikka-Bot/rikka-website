@@ -34,7 +34,7 @@ Copie .env.example para .env e configure:
 - GET /api/auth/callback
 - GET /api/auth/user
 - POST /api/auth/logout
-- GET /logout
+- GET /logout: retorna 405; não altera sessão.
 - POST /logout
 - GET /api/hello
 - GET /api/health
@@ -56,3 +56,19 @@ idempotente no primeiro comando do usuário.
 O `project_id` da service account deste backend deve ser o mesmo usado pela
 Rikka. `FIREBASE_PROJECT_ID` sozinho não corrige uma credencial pertencente a
 outro projeto.
+
+## Segurança e operação
+
+Logout usa POST e exige `Origin` autorizado (ou `Referer` autorizado quando
+`Origin` não existe). O frontend usa `/api/auth/logout` pelo rewrite do Next.js.
+Em produção, configure `NODE_ENV=production`, `SESSION_SECRET` aleatório e
+origens HTTPS explícitas. Não reutilize o placeholder do `.env.example`.
+
+OAuth: 20 inícios/10 minutos; callbacks compartilham 30/10 minutos; leitura de
+sessão: 120/minuto; logout: 30/minuto, por IP e por processo. Reinícios e réplicas
+não compartilham contadores. Health/hello não carregam sessão. Mantenha
+`trust proxy=1` até validar a cadeia real de proxies; não use IP como autorização.
+
+Consulte [a auditoria de segurança](../SECURITY_AUDIT.md), especialmente a
+revogação da chave Firebase Admin encontrada no histórico e as verificações
+de IAM, Rules, TTL e infraestrutura antes da loja.

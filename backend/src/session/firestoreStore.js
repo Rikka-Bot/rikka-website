@@ -19,7 +19,7 @@ class FirestoreSessionStore extends session.Store {
         if (!snapshot.exists) return callback(null, null);
         const stored = snapshot.data() || {};
         const expiresAt = stored.expiresAt?.toDate?.() || stored.expiresAt;
-        if (expiresAt && new Date(expiresAt).getTime() <= Date.now()) {
+        if (!expiresAt || !Number.isFinite(new Date(expiresAt).getTime()) || new Date(expiresAt).getTime() <= Date.now()) {
           await snapshot.ref.delete();
           return callback(null, null);
         }
@@ -50,7 +50,8 @@ class FirestoreSessionStore extends session.Store {
     this.documentForSession(sid).update({ expiresAt, updatedAt: new Date() })
       .then(() => callback())
       .catch((error) => {
-        if (error.code === 5 || error.code === 'not-found') return this.set(sid, value, callback);
+        // A concurrent logout may have deleted this session. Never recreate it.
+        if (error.code === 5 || error.code === 'not-found') return callback();
         return callback(error);
       });
   }
