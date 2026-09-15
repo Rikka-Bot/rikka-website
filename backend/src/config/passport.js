@@ -34,13 +34,15 @@ function configurePassport({ loadIdentity = loadCurrentIdentity } = {}) {
       clientID: DISCORD_CLIENT_ID,
       clientSecret: DISCORD_CLIENT_SECRET,
       callbackURL: DISCORD_REDIRECT_URI,
-      scope: ['identify'],
+      scope: ['identify', 'email'],
       state: true,
     }, (_accessToken, _refreshToken, profile, done) => done(null, {
       id: profile.id,
       username: profile.username,
       globalName: profile.global_name || profile.globalName || null,
       avatar: profile.avatar,
+      // Account data for registration only; sessionIdentity deliberately omits email.
+      email: profile.email || null,
     })));
   } else {
     console.warn('DISCORD_CLIENT_ID e DISCORD_CLIENT_SECRET não configurados. Login Discord ficará indisponível.');

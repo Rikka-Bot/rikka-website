@@ -12,6 +12,7 @@ function buildExistingUserPatch(existing, profile, timestamp) {
     username: profile.username || 'Unknown',
     globalName: profile.globalName || null,
     avatar: profile.avatar || null,
+    email: profile.email || null,
     verified: true,
   };
   const patch = {};
@@ -34,6 +35,7 @@ function buildNewUserData(profile, ipAddress, timestamp) {
     username: profile.username || 'Unknown',
     globalName: profile.globalName || null,
     avatar: profile.avatar || null,
+    email: profile.email || null,
     verified: true,
     verifiedAt: timestamp,
     updatedAt: timestamp,
