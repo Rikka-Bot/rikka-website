@@ -1,4 +1,5 @@
 const pt = {
+  'nav.logout': 'Sair', 'nav.user': 'Usuário',
   'nav.logoLabel':'Voltar para a página inicial da Rikka','theme.label':'Tema','sticker.drop':'NOVO DROP!','sticker.wanted':'PROCURANDO ESSA? ♡','sticker.plusOne':'+1 CARTA','sticker.gotIt':'PEGUEI!','rikkaNote.label':'Rikka diz:','rikkaNote.drop':'Será que sua favorita vem no próximo drop? ♡','rikkaNote.collection':'Essa vai pra coleção!',
   'nav.label':'Navegação principal','nav.home':'Início','nav.how':'Como funciona','nav.collection':'Coleção','nav.features':'Recursos','nav.about':'Sobre','nav.login':'Entrar','nav.add':'Adicionar ao Discord','nav.open':'Abrir menu','nav.close':'Fechar menu',
   'lang.label':'Idioma','lang.pt':'Português (Brasil)','lang.en':'English','theme.dark':'Ativar modo escuro','theme.light':'Ativar modo claro','theme.nameLight':'Claro','theme.nameDark':'Escuro','skip':'Pular para o conteúdo',

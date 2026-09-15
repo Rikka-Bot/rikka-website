@@ -11,4 +11,32 @@
 .brand .brandLogo{display:block;width:42px;height:auto;border-radius:0;object-fit:contain;box-shadow:none}.brand:hover .brandLogo{transform:translateY(-1px)}
 @media(max-width:460px){.brand .brandLogo{width:36px;height:auto}}
 .brand{gap:8px}.brand>span{display:block;color:var(--text);font-family:"Nunito Sans","Arial Rounded MT Bold",ui-rounded,system-ui,sans-serif;font-size:1.34rem;font-weight:800;line-height:1;letter-spacing:-.035em}.brand>span b{color:var(--coral);font:inherit}.brand .brandLogo{flex:none}
+.userMenu{position:relative;min-width:0;flex:0 1 156px}
+.userTrigger{display:flex;align-items:center;gap:7px;width:100%;max-width:156px;min-height:40px;padding:4px 6px;border:1px solid transparent;border-radius:12px;color:var(--text);background:transparent;font:inherit;font-size:.82rem;font-weight:800;cursor:pointer}
+.userAvatar{display:grid;place-items:center;flex:none;width:30px;height:30px;overflow:hidden;border:1px solid var(--line);border-radius:50%;color:var(--text);background:var(--surface-soft);font-size:.8rem;font-weight:850}
+.userAvatar img{display:block;width:100%;height:100%;object-fit:cover}
+.userName{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.userChevron{flex:none;margin-left:auto;font-size:.7rem;transition:transform .18s}
+.userTrigger[aria-expanded="true"] .userChevron{transform:rotate(180deg)}
+.userTrigger:hover,.userTrigger[aria-expanded="true"],.userMenuItem:hover{background:var(--surface-soft)}
+.userTrigger:focus-visible,.userMenuItem:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+.userDropdown{position:absolute;z-index:2;top:calc(100% + 8px);right:0;width:240px;max-width:calc(100vw - 64px);padding:7px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text);box-shadow:var(--shadow);animation:userMenuEnter .16s ease-out}
+.userSummary{display:flex;align-items:center;gap:10px;padding:9px 7px 13px;margin-bottom:5px;border-bottom:1px solid var(--line)}
+.userSummary>div{min-width:0}
+.userSummary strong,.userSummary small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.userSummary strong{font-size:.82rem}.userSummary small{margin-top:3px;color:var(--muted);font-size:.72rem}
+.userMenuItem{display:block;width:100%;padding:10px;border:0;border-radius:9px;color:var(--text);background:transparent;text-align:left;font:inherit;font-size:.82rem;font-weight:800;cursor:pointer}
+@keyframes userMenuEnter{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1140px){
+  .mobileMenu{max-height:calc(100dvh - 88px);overflow-y:auto}
+  .mobileActions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:10px;margin-top:16px}
+  .mobileActions>a{padding:12px;text-align:center;border:1px solid var(--line);border-radius:12px;font-weight:850}
+  .mobileActions>a:last-child{color:#fff;background:var(--navy)}
+  .userMenuMobile{grid-column:1 / -1}
+  .userMenuMobile .userTrigger{max-width:none;padding:7px 10px;border-color:var(--line)}
+  .userMenuMobile .userDropdown{position:relative;top:auto;right:auto;width:100%;max-width:none;margin-top:8px;box-shadow:none}
+  .userMenuMobile+.navCta,.userMenuMobile+a{grid-column:1 / -1}
+}
+@media(max-width:460px){.mobileActions{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.userDropdown{animation:none}.userChevron{transition:none}}
 @media(max-width:460px){.brand{gap:7px}.brand>span{font-size:1.16rem;letter-spacing:-.025em}}

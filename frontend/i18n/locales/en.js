@@ -1,5 +1,6 @@
 import pt from './pt-BR';
 const en = {...pt,
+  'nav.logout': 'Log out', 'nav.user': 'User',
   'nav.logoLabel':'Go to Rikka home page','theme.label':'Theme','sticker.drop':'NEW DROP!','sticker.wanted':'WANTED ♡','sticker.plusOne':'+1 CARD','sticker.gotIt':'GOT IT!','rikkaNote.label':'Rikka says:','rikkaNote.drop':'Could your favorite be in the next drop? ♡','rikkaNote.collection':'This one goes in the collection!',
   'nav.label':'Main navigation','nav.home':'Home','nav.how':'How it works','nav.collection':'Collection','nav.features':'Features','nav.about':'About','nav.login':'Log in','nav.add':'Add to Discord','nav.open':'Open menu','nav.close':'Close menu','lang.label':'Language','theme.dark':'Enable dark mode','theme.light':'Enable light mode','theme.nameLight':'Light','theme.nameDark':'Dark','skip':'Skip to content',
   'common.ready':'Ready to start?','common.add':'Add Rikka','common.addDiscord':'Add to Discord','common.support':'Support server','common.next':'Your next card could be in the next drop.','common.nextText':'Add Rikka to your server and start your collection.','common.cardsNote':'Illustrative cards — actual artwork appears on Discord.','common.avatar':'Rikka official avatar',
