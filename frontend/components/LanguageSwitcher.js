@@ -12,10 +12,11 @@ export default function LanguageSwitcher({ mobile = false, onSelect }) {
   }, []);
   const choose = (next) => { setOpen(false); onSelect?.(); if (next !== locale) setLanguage(next); };
   return <div className={`${styles.language} ${mobile ? styles.languageMobile : ''}`} ref={root}>
-    <button type="button" aria-label={`${t('lang.label')}: ${locale}`} aria-expanded={open} aria-haspopup="listbox" aria-controls={mobile ? 'mobile-language-menu' : 'language-menu'} onClick={() => setOpen(value => !value)}><span aria-hidden="true">◎</span><b>{locale === 'en' ? 'EN' : 'PT-BR'}</b><i aria-hidden="true">⌄</i></button>
+    <button type="button" aria-label={`${t('lang.label')}: ${locale}`} aria-expanded={open} aria-haspopup="listbox" aria-controls={mobile ? 'mobile-language-menu' : 'language-menu'} onClick={() => setOpen(value => !value)}><span aria-hidden="true">◎</span><b>{locale === 'pt-BR' ? 'PT-BR' : locale.toUpperCase()}</b><i aria-hidden="true">⌄</i></button>
     <div id={mobile ? 'mobile-language-menu' : 'language-menu'} className={`${styles.languageMenu} ${open ? styles.languageOpen : ''}`} role="listbox" aria-label={t('lang.label')}>
       <button role="option" aria-selected={locale === 'pt-BR'} onClick={() => choose('pt-BR')}><span><b>PT-BR</b>{t('lang.pt')}</span>{locale === 'pt-BR' && <i>✓</i>}</button>
       <button role="option" aria-selected={locale === 'en'} onClick={() => choose('en')}><span><b>EN</b>{t('lang.en')}</span>{locale === 'en' && <i>✓</i>}</button>
+      <button role="option" aria-selected={locale === 'ja'} onClick={() => choose('ja')}><span><b>JA</b>{t('lang.ja')}</span>{locale === 'ja' && <i>✓</i>}</button>
     </div>
   </div>;
 }

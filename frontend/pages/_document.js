@@ -8,6 +8,7 @@ export default function Document({ locale }) {
 
 Document.getInitialProps = async (ctx) => {
   const initialProps = await ctx.defaultGetInitialProps(ctx);
-  const locale = ctx.pathname === '/en' || ctx.pathname.startsWith('/en/') ? 'en' : 'pt-BR';
+  const locale = ctx.pathname === '/ja' || ctx.pathname.startsWith('/ja/') ? 'ja'
+    : ctx.pathname === '/en' || ctx.pathname.startsWith('/en/') ? 'en' : 'pt-BR';
   return { ...initialProps, locale };
 };

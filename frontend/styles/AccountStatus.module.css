@@ -1,0 +1,89 @@
+.page {
+  --accent: var(--cyan);
+  --accent-soft: var(--aqua);
+  --ink: #087985;
+  position: relative;
+  isolation: isolate;
+  padding-top: 80px;
+  overflow: clip;
+  background: radial-gradient(ellipse at 12% 44%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 56%), var(--bg);
+}
+.blocked { --accent: var(--coral); --accent-soft: var(--soft-coral); --ink: #a33f38; }
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 88px);
+  width: min(1120px, calc(100% - 64px));
+  min-height: min(800px, 88svh);
+  margin: auto;
+  padding: clamp(64px, 8vw, 112px) 0;
+}
+.scene { position: relative; width: min(100%, 400px); aspect-ratio: 1; justify-self: center; }
+.halo { position: absolute; inset: 3%; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius: 50%; }
+.halo::after { content: ''; position: absolute; inset: 10%; border: 1px dashed color-mix(in srgb, var(--accent) 24%, transparent); border-radius: 50%; }
+.backCard, .frontCard { position: absolute; inset: 16% 19% 12%; border-radius: 24px; }
+.backCard { transform: rotate(-14deg) translate(-7%, -2%); background: color-mix(in srgb, var(--accent) 18%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line)); }
+.frontCard { display: flex; flex-direction: column; justify-content: space-between; padding: 20px; transform: rotate(7deg); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); color: var(--ink); font-size: .66rem; font-weight: 900; letter-spacing: .2em; }
+.frontCard span:last-child { align-self: flex-end; font-size: 1.2rem; }
+.sticker { position: absolute; z-index: 2; top: 11%; right: 0; padding: 8px 16px; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); border-radius: 10px; background: var(--accent-soft); color: var(--navy-dark); font-weight: 900; font-size: .83rem; transform: rotate(8deg); box-shadow: 0 5px 0 color-mix(in srgb, var(--accent) 12%, transparent); }
+.sticker span { margin-left: 8px; }
+.reaction { position: absolute; inset: 23% 21% 22%; display: grid; place-items: center; animation: float 6s ease-in-out infinite; }
+.reaction img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 12px 12px #151c2c18); }
+.fallback { color: var(--text); font-size: 2.4rem; font-weight: 900; letter-spacing: -.05em; }
+.fallback span { display: block; text-align: center; color: var(--ink); }
+.sceneSparkle { position: absolute; bottom: 17%; left: 5%; font-size: 2.8rem; color: var(--ink); transform: rotate(-12deg); }
+.sceneHeart { position: absolute; top: 38%; right: 3%; font-size: 2.3rem; color: var(--ink); transform: rotate(15deg); }
+.caption { position: absolute; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .2em; }
+.caption i { width: 28px; height: 1px; background: var(--accent); }
+.copy { min-width: 0; }
+.badge { display: inline-flex; align-items: center; gap: 9px; padding: 6px 12px; margin-bottom: 22px; border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line)); border-radius: 999px; color: var(--ink); background: color-mix(in srgb, var(--accent) 9%, var(--surface)); font-weight: 900; font-size: .7rem; letter-spacing: .1em; }
+.badge > span { font-size: .95rem; line-height: 1; }
+.copy h1 { max-width: 12em; font-size: clamp(2.25rem, 4.1vw, 3.7rem); font-weight: 900; line-height: 1.08; letter-spacing: -.055em; text-wrap: balance; overflow-wrap: anywhere; }
+.description { margin-top: 24px; max-width: 31em; color: var(--muted); font-size: 1.1rem; line-height: 1.75; }
+.support { margin-top: 32px; padding: 22px 0 0 20px; border-top: 1px solid var(--line); position: relative; }
+.support::before { content: ''; position: absolute; top: 26px; bottom: 4px; left: 0; width: 3px; border-radius: 3px; background: var(--accent); }
+.support h2 { font-size: 1.05rem; font-weight: 900; letter-spacing: -.025em; }
+.support h2 span { margin-left: 4px; color: var(--ink); }
+.support p { margin-top: 8px; max-width: 35em; color: var(--muted); font-size: .94rem; line-height: 1.75; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
+.actions a { min-height: 50px; padding: 12px 18px; font-size: .88rem; text-align: center; }
+.primary { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+.home { box-shadow: none; }
+.decorations { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; color: var(--accent); }
+.decorations span { position: absolute; opacity: .22; }
+.decorations span:nth-child(1) { top: 7%; left: 7%; font-size: 2.5rem; transform: rotate(-18deg); }
+.decorations span:nth-child(2) { top: 11%; right: 6%; font-size: 1.5rem; }
+.decorations span:nth-child(3) { bottom: 5%; left: 44%; font-size: 2.6rem; transform: rotate(18deg); }
+.decorations span:nth-child(4) { top: 54%; right: -12px; font-size: 4rem; transform: rotate(-15deg); }
+.decorations span:nth-child(5) { bottom: 4%; left: -12px; font-size: 4rem; }
+:global([data-theme="dark"]) .page { --ink: var(--aqua); }
+:global([data-theme="dark"]) .blocked { --ink: var(--soft-coral); }
+:global([data-theme="dark"]) .blocked .primary { background: var(--soft-coral); }
+:global([lang="ja"]) .copy h1 { line-height: 1.3; letter-spacing: -.025em; }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-6px) rotate(-1deg); } }
+@media (max-width: 1024px) {
+  .layout { width: calc(100% - 48px); gap: 32px; }
+  .actions { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 767px) {
+  .layout { grid-template-columns: minmax(0, 1fr); width: min(560px, calc(100% - 40px)); gap: 32px; padding: 40px 0 64px; }
+  .scene { width: min(64vw, 280px); }
+  .copy h1 { max-width: none; font-size: clamp(2rem, 6.8vw, 3rem); }
+  .badge { margin-bottom: 18px; }
+  .description { margin-top: 18px; font-size: 1rem; }
+  .support { margin-top: 24px; }
+  .actions { align-items: stretch; }
+  .actions a { width: 100%; }
+  .sticker { font-size: .7rem; padding: 6px 10px; }
+  .frontCard { padding: 14px; border-radius: 18px; }
+  .sceneSparkle, .sceneHeart { font-size: 1.8rem; }
+  .decorations span:nth-child(4) { right: -30px; opacity: .12; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reaction { animation: none; }
+  .actions a { transition: none; }
+  .actions a:hover { transform: none; }
+}
